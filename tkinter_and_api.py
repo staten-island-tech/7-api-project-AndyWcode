@@ -1,6 +1,5 @@
-from tkinter import *
-import random
 
+import time
 
 
 """ rank = [{"Rank":"loser", "buffs": 1},
@@ -76,4 +75,37 @@ rankupbutton.pack()
 window.mainloop() """
 
 
+from tkinter import *
+import requests
 
+
+window = Tk()
+window.geometry("600x600")
+
+# enter stuff
+enterpokemon = Entry(window,font = "Arial, 15")
+
+
+def enterbutton():
+    pokemonentered = enterpokemon.get()
+    response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemonentered.lower()}")
+    if response.status_code != 200:
+        print("Error fetching data!")
+        return None
+    
+    data = response.json()
+    allstuff = data.get({
+        "name": data["name"],
+        "height": data["height"],
+        "weight": data["weight"],
+        "types": [t["type"]["name"] for t in data["types"]]
+    })
+    for i in allstuff:
+        Label(window, text = i, padx=5,pady=5).pack()
+
+
+# sumbit and do it
+sumbitbutton = Button(window, text = "Enter", command=enterbutton, padx = 5, pady=5)
+enterpokemon.grid(row = 4, column=5)
+sumbitbutton.grid(row=4,column = 6)
+window.mainloop()
