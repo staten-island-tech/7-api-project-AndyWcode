@@ -79,33 +79,74 @@ from tkinter import *
 import requests
 
 
-window = Tk()
-window.geometry("600x600")
 
 # enter stuff
-enterpokemon = Entry(window,font = "Arial, 15")
+""" enterpokemon = Entry(window,font = "Arial, 15")
 
 
 def enterbutton():
     pokemonentered = enterpokemon.get()
     response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemonentered.lower()}")
     if response.status_code != 200:
-        print("Error fetching data!")
-        return None
-    
+        labelerror = True
+        if labelerror == True:
+            Label(window, text = "ERROR, CHECK UR SPELLING",padx=15,pady=15,font="Arial,20", bg="Red").grid(row=10,column=10)
+            window.after(2)
+        
+        return
+    elif pokemonentered == "":
+        return
     data = response.json()
-    allstuff = data.get({
+    all_stuff = {
         "name": data["name"],
         "height": data["height"],
-        "weight": data["weight"],
+        "weight": f"{data["weight"]}lbs",
         "types": [t["type"]["name"] for t in data["types"]]
-    })
-    for i in allstuff:
-        Label(window, text = i, padx=5,pady=5).pack()
+        }
+    row = 7
+    labelerror = False
+    for key, stuff in all_stuff.items():
+        Label(window, text = f"{key}: {stuff}",padx = 5, pady=5, font= "Arial, 15",bg ="Light Blue" ).grid(row=row, column=3)
+        row += 5
+    
+
 
 
 # sumbit and do it
 sumbitbutton = Button(window, text = "Enter", command=enterbutton, padx = 5, pady=5)
 enterpokemon.grid(row = 4, column=5)
 sumbitbutton.grid(row=4,column = 6)
-window.mainloop()
+
+window.mainloop() """
+
+# enter stuff
+
+
+# favorites = []
+
+
+# def get_fact():
+#     response = requests.get("https://uselessfacts.jsph.pl/api/v2/facts/random")
+#     data = response.json()  
+#     text1 = data["text"]
+#     Label(text =data["text"], font = ("Comic Sans MS", 15)).pack()
+#     def favoriteing():
+#         global favorites
+#         favorites.append(data["text"])
+#     favorite = Button(text= 'I like this', font="Arial, 10",command=favoriteing).pack()
+
+# def showfavorites():
+#     favoriteswindow = Tk()
+#     favoriteswindow.geometry("300x300")
+#     Label(favoriteswindow, text = "Your favorites", font = ("Times New Roman", 15), bg = "red").pack()
+#     for fact in favorites:
+#         makefact = Label(favoriteswindow, text =fact, font = "Arial, 12").pack()
+
+
+# Getfactbutton = Button(text = "get fact", command = get_fact,padx=50, pady= 10, font = "Arial,10").pack()
+# Favbutton = Button(text = "Show ur favorite facts",command = showfavorites, padx = 10, pady = 10, font="Arial, 15").pack()
+
+userip = input()
+response = requests.get(f"https://ip-intelligence.abstractapi.com/v1/?api_key=2583a7c56c30406c80e08a18c7db5df2&ip_address={userip}")
+data = response.json()
+print(data["location"]["city"])
