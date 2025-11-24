@@ -146,7 +146,16 @@ window.mainloop() """
 # Getfactbutton = Button(text = "get fact", command = get_fact,padx=50, pady= 10, font = "Arial,10").pack()
 # Favbutton = Button(text = "Show ur favorite facts",command = showfavorites, padx = 10, pady = 10, font="Arial, 15").pack()
 
-userip = input()
-response = requests.get(f"https://ip-intelligence.abstractapi.com/v1/?api_key=2583a7c56c30406c80e08a18c7db5df2&ip_address={userip}")
+userstate = input()
+
+
+response = requests.get(f"http://api.weatherstack.com/current?access_key=f7d3199d35586d083992af47216c6d0b&query={userstate}")
 data = response.json()
-print(data["location"]["city"])
+print(data)
+
+window = Tk()
+window.geometry("500x500")
+photo = PhotoImage(file=f"{data["current"]["weather_icons"]}")
+label = Label(window, image = photo)
+label.pack()
+window.mainloop
