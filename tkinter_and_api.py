@@ -146,16 +146,23 @@ window.mainloop() """
 # Getfactbutton = Button(text = "get fact", command = get_fact,padx=50, pady= 10, font = "Arial,10").pack()
 # Favbutton = Button(text = "Show ur favorite facts",command = showfavorites, padx = 10, pady = 10, font="Arial, 15").pack()
 
-userstate = input()
-
-
-response = requests.get(f"http://api.weatherstack.com/current?access_key=f7d3199d35586d083992af47216c6d0b&query={userstate}")
-data = response.json()
-print(data)
-
 window = Tk()
-window.geometry("500x500")
-photo = PhotoImage(file=f"{data["current"]["weather_icons"]}")
-label = Label(window, image = photo)
-label.pack()
-window.mainloop
+window.geometry("900x900")
+
+def heroinfoclick():
+    Label(window, text = userhero[0]["name"])
+
+def searchhero():
+    response = requests.get(f" https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{userhero}")
+    data = response.json()
+    important_info = {
+        "name":data[0]["name"],
+        "counters": data[0]["name"],
+        "type":data[0]["type"],
+        ""
+    }
+userhero = input()]
+response = requests.get(f" https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{userhero}")
+data = response.json()
+for counter in data[0]['counters']:
+    print(counter)
