@@ -149,20 +149,39 @@ window.mainloop() """
 window = Tk()
 window.geometry("900x900")
 
-def heroinfoclick():
-    Label(window, text = userhero[0]["name"])
-
+Inputhero = Entry(window, font = "Arial, 20")
+deletelabelfunction = []
 def searchhero():
-    response = requests.get(f" https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{userhero}")
+    
+    if len(deletelabelfunction) >=1:
+        print(deletelabelfunction)
+        for label in deletelabelfunction:
+            label.destroy()
+        deletelabelfunction.clear()
+    enteredhero = Inputhero.get()
+    response = requests.get(f" https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{enteredhero.title()}")
     data = response.json()
     important_info = {
         "name":data[0]["name"],
-        "counters": data[0]["name"],
         "type":data[0]["type"],
-        ""
-    }
-userhero = input()]
-response = requests.get(f" https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{userhero}")
-data = response.json()
-for counter in data[0]['counters']:
-    print(counter)
+        "archetype":data[0]["archetype"]    }
+    counters = data[0]["counters"]
+    for key, info in important_info.items():
+        labels = Label(text =f"{key}:{info}", font = "Arial 10")
+        labels.pack()
+        deletelabelfunction.append(labels)
+    matchuplabel = Label(text = "MATCHUPS", bg = "red", font = "Arial, 20")
+    matchuplabel.pack()
+    deletelabelfunction.append(matchuplabel)
+    for matchups, info in counters.items():
+        labelss = Label(text=f"{matchups}: {info}", font = "Arial, 10")
+        labelss.pack()
+        deletelabelfunction.append(labelss)
+    
+    
+
+
+Inputhero.pack()
+enterbutton = Button(window, padx = 10, pady = 10, font = "Arial, 15", text = "Search", command=searchhero).pack()
+
+window.mainloop()
