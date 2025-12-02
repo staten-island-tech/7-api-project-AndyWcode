@@ -146,42 +146,67 @@ window.mainloop() """
 # Getfactbutton = Button(text = "get fact", command = get_fact,padx=50, pady= 10, font = "Arial,10").pack()
 # Favbutton = Button(text = "Show ur favorite facts",command = showfavorites, padx = 10, pady = 10, font="Arial, 15").pack()
 
-window = Tk()
-window.geometry("900x900")
 
+signs = [
+{ "matchup":"-", "meaning":"PRETTY BAD" },
+{ "matchup":"--","meaning":"DO NOT PICK AGAINST"},
+{ "matchup":"+", "meaning":"WONT HURT PICKING IT"},
+{ "matchup":"++","meaning":"MUST PICK AGAINST"}]
+
+window = Tk()
+window.geometry("600x600")
+overwatchlabel = Label(window, text = "Input what hero:").pack()
 Inputhero = Entry(window, font = "Arial, 20")
 deletelabelfunction = []
+
+
 def searchhero():
-    
+    #  dis is to delete stuff whenever somethign else is searched
+    enteredhero = Inputhero.get()
     if len(deletelabelfunction) >=1:
         print(deletelabelfunction)
         for label in deletelabelfunction:
             label.destroy()
         deletelabelfunction.clear()
-    enteredhero = Inputhero.get()
-    response = requests.get(f" https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{enteredhero.title()}")
-    data = response.json()
-    important_info = {
-        "name":data[0]["name"],
-        "type":data[0]["type"],
-        "archetype":data[0]["archetype"]    }
-    counters = data[0]["counters"]
-    for key, info in important_info.items():
-        labels = Label(text =f"{key}:{info}", font = "Arial 10")
-        labels.pack()
-        deletelabelfunction.append(labels)
-    matchuplabel = Label(text = "MATCHUPS", bg = "red", font = "Arial, 20")
-    matchuplabel.pack()
-    deletelabelfunction.append(matchuplabel)
-    for matchups, info in counters.items():
-        labelss = Label(text=f"{matchups}: {info}", font = "Arial, 10")
-        labelss.pack()
-        deletelabelfunction.append(labelss)
-    
+    # get info 
+    try:
+        response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{enteredhero.title()}")
+        status = response.status_code
+        if status ==200:
+
+            data = response.json()
+            
+            important_info = {
+                "name":data[0]["name"],
+                "type":data[0]["type"],
+                "archetype":data[0]["archetype"]}
+            counters = data[0]["counters"]
+            
+            # dis is to delete stuff whenever somethign else is searched
+            for key, info in important_info.items():
+                labels = Label(text =f"{key}:{info}", font = "Arial 10")
+                labels.pack()
+                deletelabelfunction.append(labels)
+            matchuplabel = Label(text = "MATCHUPS", bg = "red", font = "Arial, 20")
+            matchuplabel.pack()
+            deletelabelfunction.append(matchuplabel)
+
+            # converts the -, --, +, ++ into text so reader knows wat they mean
+            for matchups, info in counters.items():
+                for matchup in  signs:
+                    if info == matchup["matchup"]:
+                        info = matchup["meaning"]
+                labelss = Label(window, text=f"{matchups}:{info}", font = "Arial, 10")
+                labelss.pack()
+                deletelabelfunction.append(labelss)
+    except:
+        pass
+
     
 
 
 Inputhero.pack()
+
 enterbutton = Button(window, padx = 10, pady = 10, font = "Arial, 15", text = "Search", command=searchhero).pack()
 
 window.mainloop()
