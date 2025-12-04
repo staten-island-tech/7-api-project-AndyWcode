@@ -163,7 +163,7 @@ deletelabelfunction = []
 def searchhero():
     
     #  dis is to delete stuff whenever somethign else is searched
-    enteredhero = Inputhero.get()
+    
     if len(deletelabelfunction) >=1:
         print(deletelabelfunction)
         for label in deletelabelfunction:
@@ -171,41 +171,45 @@ def searchhero():
         deletelabelfunction.clear()
         
     
-    # test userinput
+    # test userinput i think
     try:
-        response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/{enteredhero.title()}")
-
-        if response.status_code == 200:
-            data = response.json()
-            for hero in requests.get("https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes"):
-                if enteredhero.title() == hero["name"]:
-
-                    important_info = {
-                        "name":data[hero["name"]]["name"],
-                        "type":data[hero["name"]]["type"],
-                        "archetype":data[hero["name"]]["archetype"]}
+        enteredhero = Inputhero.get()
+        response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
+        
+        if response.status_code != 200:
+            raise Exception
+        data = response.json()
+        for info in data:
+            if info["name"] == enteredhero.title():
+                heroindex = (data.index(info))
+        important_info = {
+                "name":data[heroindex]["name"],
+                "type":data[heroindex]["type"],
+                "archetype":data[heroindex]["archetype"]}
                 
-            counters = data[hero["name"]]["counters"]
+        counters = data[heroindex]["counters"]
                         
-            #give user response
-            for key, info in important_info.items():
+        #give user response
+        for key, info in important_info.items():
                 labels = Label(text =f"{key}:{info}", font = "Arial 10")
                 labels.pack()
                 deletelabelfunction.append(labels)
 
-            matchuplabel = Label(text = "MATCHUPS", font = ("Arial", 20, "bold"))
-            matchuplabel.pack()
-            deletelabelfunction.append(matchuplabel)
+        matchuplabel = Label(text = "MATCHUPS", font = ("Arial", 20, "bold"))
+        matchuplabel.pack()
+        deletelabelfunction.append(matchuplabel)
 
-                # converts the -, --, +, ++ into text so reader knows wat they mean
-            for matchups, info in counters.items():
-                for matchup in  signs:
-                    if info == matchup["matchup"]:
-                        info = matchup["meaning"]
-                        labelss = Label(window, text=f"{matchups}:{info}", font = "Arial, 10", bg = matchup["bg"])
-                        labelss.pack()
-                        deletelabelfunction.append(labelss)
+            # converts the -, --, +, ++ into text so reader knows wat they mean
+        for matchups, info in counters.items():
+            for matchup in  signs:
+                if info == matchup["matchup"]:
+                    info = matchup["meaning"]
+                    labelss = Label(window, text=f"{matchups}:{info}", font = "Arial, 10", bg = matchup["bg"])
+                    labelss.pack()
+                    deletelabelfunction.append(labelss)
+       
     except:
+            
             errorlabel = Label(window, text =  "Please check ur spelling", font = "Arial, 10")
             errorlabel.pack()
             deletelabelfunction.append(errorlabel)
