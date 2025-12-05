@@ -155,71 +155,76 @@ signs = [
 
 window = Tk()
 window.geometry("600x600")
-overwatchlabel = Label(window, text = "Input what hero:").pack()
+window.configure(bg = "grey")
+overwatchlabel = Label(window, text = "Input what hero:").grid(row =4, column =1 )
 Inputhero = Entry(window, font = "Arial, 20")
 deletelabelfunction = []
 
 
 def searchhero():
     
-    #  dis is to delete stuff whenever somethign else is searched
+    #  dis is to delete stuff whenever somethign else is searched so its not messy
     
     if len(deletelabelfunction) >=1:
-        print(deletelabelfunction)
         for label in deletelabelfunction:
             label.destroy()
         deletelabelfunction.clear()
         
     
-    # test userinput i think
+    # test userinput for the try
     try:
         enteredhero = Inputhero.get()
         response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
         
         if response.status_code != 200:
-            raise Exception
+            raise Exception #<--- yea idk what this does i admit this was ai
         data = response.json()
         for info in data:
             if info["name"] == enteredhero.title():
                 heroindex = (data.index(info))
         important_info = {
-                "name":data[heroindex]["name"],
-                "type":data[heroindex]["type"],
-                "archetype":data[heroindex]["archetype"]}
+                "Name":data[heroindex]["name"],
+                "Type":data[heroindex]["type"],
+                "Archetype":data[heroindex]["archetype"]}
                 
         counters = data[heroindex]["counters"]
-                        
+         
         #give user response
+        row2 =3
         for key, info in important_info.items():
-                labels = Label(text =f"{key}:{info}", font = "Arial 10")
-                labels.pack()
+                labels = Label(text =f"{key}:{info}", font = "Arial 10", fg = "yellow", bg = "grey")
+                labels.grid(row = row2, column = 4)
+                row2 +=1
                 deletelabelfunction.append(labels)
 
         matchuplabel = Label(text = "MATCHUPS", font = ("Arial", 20, "bold"))
-        matchuplabel.pack()
+        matchuplabel.grid(row =10, column= 1)
         deletelabelfunction.append(matchuplabel)
 
             # converts the -, --, +, ++ into text so reader knows wat they mean
+        row1= 11
         for matchups, info in counters.items():
             for matchup in  signs:
                 if info == matchup["matchup"]:
                     info = matchup["meaning"]
                     labelss = Label(window, text=f"{matchups}:{info}", font = "Arial, 10", bg = matchup["bg"])
-                    labelss.pack()
+                    labelss.grid(row = row1, column= 1)
+                    row1 += 2
                     deletelabelfunction.append(labelss)
        
     except:
             
             errorlabel = Label(window, text =  "Please check ur spelling", font = "Arial, 10")
-            errorlabel.pack()
+            errorlabel.grid(row = 10, column = 10)
             deletelabelfunction.append(errorlabel)
+
     
-    
+response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
+data1 = response.json()
 
-Inputhero.pack()
+Inputhero.grid(row = 5, column = 1)
 
-enterbutton = Button(window, padx = 10, pady = 10, font = "Arial, 15", text = "Search", command=searchhero).pack()
-
+enterbutton = Button(window, padx = 10, pady = 10, font = "Arial, 15", text = "Search", command=searchhero).grid(row = 6, column = 1)
 
 
 window.mainloop()
