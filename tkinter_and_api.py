@@ -74,7 +74,7 @@ upgradebutton.pack()
 rankupbutton.pack()
 window.mainloop() """
 
-
+import tkinter 
 from tkinter import *
 import requests
 
@@ -145,6 +145,7 @@ window.mainloop() """
 
 # Getfactbutton = Button(text = "get fact", command = get_fact,padx=50, pady= 10, font = "Arial,10").pack()
 # Favbutton = Button(text = "Show ur favorite facts",command = showfavorites, padx = 10, pady = 10, font="Arial, 15").pack()
+from PIL import Image, ImageTk
 
 
 signs = [
@@ -153,10 +154,13 @@ signs = [
 { "matchup":"+", "meaning":"WONT HURT PICKING IT", "bg": "green"},
 { "matchup":"++","meaning":"MUST PICK AGAINST", "bg":"lime green"}]
 
+
+
+
 window = Tk()
-window.geometry("600x600")
+window.geometry("800x800")
 window.configure(bg = "grey")
-overwatchlabel = Label(window, text = "Input what hero:").grid(row =4, column =1 )
+overwatchlabel = Label(window, text = "Input hero:", bg = "white", font = ("Times",15), fg ="black" ).grid(row =4, column =1)
 Inputhero = Entry(window, font = "Arial, 20")
 deletelabelfunction = []
 
@@ -185,19 +189,20 @@ def searchhero():
         important_info = {
                 "Name":data[heroindex]["name"],
                 "Type":data[heroindex]["type"],
-                "Archetype":data[heroindex]["archetype"]}
+                "Archetype":data[heroindex]["archetype"],
+                "Quote": data[heroindex]["quotes"]}
                 
         counters = data[heroindex]["counters"]
          
         #give user response
         row2 =3
         for key, info in important_info.items():
-                labels = Label(text =f"{key}:{info}", font = "Arial 10", fg = "yellow", bg = "grey")
+                labels = Label(text =f"{key}:{info}", font = "Times 15", fg = "yellow", bg = "grey")
                 labels.grid(row = row2, column = 4)
                 row2 +=1
                 deletelabelfunction.append(labels)
 
-        matchuplabel = Label(text = "MATCHUPS", font = ("Arial", 20, "bold"))
+        matchuplabel = Label(text = "MATCHUPS", font = ("Arial", 20, "bold"), bg = "grey")
         matchuplabel.grid(row =10, column= 1)
         deletelabelfunction.append(matchuplabel)
 
@@ -207,7 +212,7 @@ def searchhero():
             for matchup in  signs:
                 if info == matchup["matchup"]:
                     info = matchup["meaning"]
-                    labelss = Label(window, text=f"{matchups}:{info}", font = "Arial, 10", bg = matchup["bg"])
+                    labelss = Label(window, text=f"{matchups}:{info}", font = "Times, 15", fg = matchup["bg"], bg = "grey")
                     labelss.grid(row = row1, column= 1)
                     row1 += 2
                     deletelabelfunction.append(labelss)
@@ -218,13 +223,15 @@ def searchhero():
             errorlabel.grid(row = 10, column = 10)
             deletelabelfunction.append(errorlabel)
 
-    
-response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
-data1 = response.json()
+
+img = Image.open("C:\Users\andyw68\Downloads\mercy.png")
+photo = ImageTk.photoimage(img)
+
+photolabel = Label(window, text = photo).grid(column = 10, row = 19)
 
 Inputhero.grid(row = 5, column = 1)
 
-enterbutton = Button(window, padx = 10, pady = 10, font = "Arial, 15", text = "Search", command=searchhero).grid(row = 6, column = 1)
+enterbutton = Button(window, padx = 50, pady = 5, font = "Times, 15", text = "Search", command=searchhero, bg = "white", fg = "black").grid(row = 6, column = 1)
 
 
 window.mainloop()
