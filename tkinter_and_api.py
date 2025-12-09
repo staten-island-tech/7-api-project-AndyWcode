@@ -154,7 +154,46 @@ signs = [
 { "matchup":"+", "meaning":"WONT HURT PICKING IT", "bg": "green"},
 { "matchup":"++","meaning":"MUST PICK AGAINST", "bg":"lime green"}]
 
+pictures_heros = [
+    {"name":"Mercy", "image":"C:\\Users\\andyw68\\Pictures\\mercy.png"},
+    {"name":"Genji", "image":"C:\\Users\\andyw68\\Pictures\\Genji.webp"},
+    {"name":"Orisa", "image":"C:\\Users\\andyw68\\Pictures\\Orisa.webp"},
+    {"name":"Tracer"       , "image":                                      },
+    {"name":"Juno"     , "image":                                      },
+    {"name":"Reinhart"   , "image":                                      },
+    {"name":"Winston"       , "image":                                      },
+    {"name":"Roadhog"       , "image":                                      },
+    {"name":"D.va"       , "image":                                      },
+    {"name":"Ramattra"       , "image":                                      },
+    {"name":"Ashe"      , "image":                                      },
+    {"name":"Echo"       , "image":                                      },
+    {"name":"Hanzo"       , "image":                                      },
+    {"name":"Junkrat"       , "image":                                      },
+    {"name":"Ana"       , "image":                                      },
+    {"name":"Wuyang"      , "image":                                      },
+    {"name":"Lucio"           ,"image":                                     ,}
+    {"name":"Life Weaver"            ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
+    {"name":              ,"image":                                     ,}
 
+]
 
 
 window = Tk()
@@ -224,11 +263,20 @@ def searchhero():
             deletelabelfunction.append(errorlabel)
 
 
-img = Image.open("C:\Users\andyw68\Downloads\mercy.png")
-photo = ImageTk.photoimage(img)
 
-photolabel = Label(window, text = photo).grid(column = 10, row = 19)
 
+response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
+data1 = response.json()
+
+for hero in data1:
+    print(hero["name"])
+
+img = Image.open("C:\\Users\\andyw68\\Pictures\\mercy.png")
+photo = ImageTk.PhotoImage(img)
+
+photolabel = Label(window, image = photo)
+photolabel.grid(column = 10, row = 20)
+photolabel.image = photo
 Inputhero.grid(row = 5, column = 1)
 
 enterbutton = Button(window, padx = 50, pady = 5, font = "Times, 15", text = "Search", command=searchhero, bg = "white", fg = "black").grid(row = 6, column = 1)
