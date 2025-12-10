@@ -155,44 +155,46 @@ signs = [
 { "matchup":"++","meaning":"MUST PICK AGAINST", "bg":"lime green"}]
 
 pictures_heros = [
-    {"name":"Mercy", "image":"C:\\Users\\andyw68\\Pictures\\mercy.png"},
-    {"name":"Genji", "image":"C:\\Users\\andyw68\\Pictures\\Genji.webp"},
-    {"name":"Orisa", "image":"C:\\Users\\andyw68\\Pictures\\Orisa.webp"},
-    {"name":"Tracer"       , "image":                                      },
-    {"name":"Juno"     , "image":                                      },
-    {"name":"Reinhart"   , "image":                                      },
-    {"name":"Winston"       , "image":                                      },
-    {"name":"Roadhog"       , "image":                                      },
-    {"name":"D.va"       , "image":                                      },
-    {"name":"Ramattra"       , "image":                                      },
-    {"name":"Ashe"      , "image":                                      },
-    {"name":"Echo"       , "image":                                      },
-    {"name":"Hanzo"       , "image":                                      },
-    {"name":"Junkrat"       , "image":                                      },
-    {"name":"Ana"       , "image":                                      },
-    {"name":"Wuyang"      , "image":                                      },
-    {"name":"Lucio"           ,"image":                                     ,}
-    {"name":"Life Weaver"            ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-    {"name":              ,"image":                                     ,}
-
+    {"name": "Ana", "image": "C:\\Users\\andyw68\\Pictures\\Ana.webp"},
+    {"name": "Ashe", "image": "C:\\Users\\andyw68\\Pictures\\Ashe.webp"},
+    {"name": "Baptiste", "image": "C:\\Users\\andyw68\\Pictures\\Baptiste.webp"},
+    {"name": "Bastion", "image": "C:\\Users\\andyw68\\Pictures\\Bastion.jpg"},
+    {"name": "Brigitte", "image": "C:\\Users\\andyw68\\Pictures\\Brigitte.webp"},
+    {"name": "Cassidy", "image": "C:\\Users\\andyw68\\Pictures\\Cassidy.webp"},
+    {"name": "D.Va", "image": "C:\\Users\\andyw68\\Pictures\\DVa.webp"},
+    {"name": "Doomfist", "image": "C:\\Users\\andyw68\\Pictures\\Doomfist.jpg"},
+    {"name": "Echo", "image": "C:\\Users\\andyw68\\Pictures\\Echo.webp"},
+    {"name": "Genji", "image": "C:\\Users\\andyw68\\Pictures\\Genji.webp"},
+    {"name": "Hanzo", "image": "C:\\Users\\andyw68\\Pictures\\Hanzo.webp"},
+    {"name": "Illari", "image": "C:\\Users\\andyw68\\Pictures\\Illari.webp"},
+    {"name": "Junker Queen", "image": "C:\\Users\\andyw68\\Pictures\\JunkerQueen.webp"},
+    {"name": "Junkrat", "image": "C:\\Users\\andyw68\\Pictures\\Junkrat.webp"},
+    {"name": "Kiriko", "image": "C:\\Users\\andyw68\\Pictures\\Kiriko.webp"},
+    {"name": "Lifeweaver", "image": "C:\\Users\\andyw68\\Pictures\\Lifeweaver.webp"},
+    {"name": "Lucio", "image": "C:\\Users\\andyw68\\Pictures\\Lucio.webp"},
+    {"name": "Mauga", "image": "C:\\Users\\andyw68\\Pictures\\Mauga.webp"},
+    {"name": "Mei", "image": "C:\\Users\\andyw68\\Pictures\\Mei.webp"},
+    {"name": "Mercy", "image": "C:\\Users\\andyw68\\Pictures\\Mercy.png"},
+    {"name": "Moira", "image": "C:\\Users\\andyw68\\Pictures\\Moira.webp"},
+    {"name": "Orisa", "image": "C:\\Users\\andyw68\\Pictures\\Orisa.webp"},
+    {"name": "Pharah", "image": "C:\\Users\\andyw68\\Pictures\\Pharah.webp"},
+    {"name": "Ramattra", "image": "C:\\Users\\andyw68\\Pictures\\Ramattra.webp"},
+    {"name": "Reaper", "image": "C:\\Users\\andyw68\\Pictures\\Reaper.webp"},
+    {"name": "Reinhardt", "image": "C:\\Users\\andyw68\\Pictures\\Reinhardt.webp"},
+    {"name": "Roadhog", "image": "C:\\Users\\andyw68\\Pictures\\Roadhog.webp"},
+    {"name": "Sigma", "image": "C:\\Users\\andyw68\\Pictures\\Sigma.webp"},
+    {"name": "Sojourn", "image": "C:\\Users\\andyw68\\Pictures\\Sojourn.webp"},
+    {"name": "Soldier: 76", "image": "C:\\Users\\andyw68\\Pictures\\Soldier76.webp"},
+    {"name": "Sombra", "image": "C:\\Users\\andyw68\\Pictures\\Sombra.webp"},
+    {"name": "Symmetra", "image": "C:\\Users\\andyw68\\Pictures\\Symmetra.webp"},
+    {"name": "Torbjörn", "image": "C:\\Users\\andyw68\\Pictures\\Torbjorn.webp"},
+    {"name": "Tracer", "image": "C:\\Users\\andyw68\\Pictures\\Tracer.webp"},
+    {"name": "Venture", "image": "C:\\Users\\andyw68\\Pictures\\Venture.webp"},
+    {"name": "Widowmaker", "image": "C:\\Users\\andyw68\\Pictures\\Widowmaker.webp"},
+    {"name": "Winston", "image": "C:\\Users\\andyw68\\Pictures\\Winston.webp"},
+    {"name": "Wrecking Ball", "image": "C:\\Users\\andyw68\\Pictures\\WreckingBall.webp"},
+    {"name": "Zarya", "image": "C:\\Users\\andyw68\\Pictures\\Zarya.webp"},
+    {"name": "Zenyatta", "image": "C:\\Users\\andyw68\\Pictures\\Zenyatta.webp"}
 ]
 
 
@@ -265,13 +267,9 @@ def searchhero():
 
 
 
-response = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
-data1 = response.json()
 
-for hero in data1:
-    print(hero["name"])
 
-img = Image.open("C:\\Users\\andyw68\\Pictures\\mercy.png")
+img = Image.open(pictures_heros[10]["image"])
 photo = ImageTk.PhotoImage(img)
 
 photolabel = Label(window, image = photo)
