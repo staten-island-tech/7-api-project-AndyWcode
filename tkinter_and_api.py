@@ -167,7 +167,7 @@ pictures_heros = [
     {"name": "Genji", "image": "C:\\Users\\andyw68\\Pictures\\Genji.webp"},
     {"name": "Hanzo", "image": "C:\\Users\\andyw68\\Pictures\\Hanzo.webp"},
     {"name": "Illari", "image": "C:\\Users\\andyw68\\Pictures\\Illari.webp"},
-    {"name": "Junker Queen", "image": "C:\\Users\\andyw68\\Pictures\\JunkerQueen.webp"},
+    {"name": "JunkerQueen", "image": "C:\\Users\\andyw68\\Pictures\\JunkerQueen.webp"},
     {"name": "Junkrat", "image": "C:\\Users\\andyw68\\Pictures\\Junkrat.webp"},
     {"name": "Kiriko", "image": "C:\\Users\\andyw68\\Pictures\\Kiriko.webp"},
     {"name": "Lifeweaver", "image": "C:\\Users\\andyw68\\Pictures\\Lifeweaver.webp"},
@@ -187,7 +187,7 @@ pictures_heros = [
     {"name": "Soldier: 76", "image": "C:\\Users\\andyw68\\Pictures\\Soldier76.webp"},
     {"name": "Sombra", "image": "C:\\Users\\andyw68\\Pictures\\Sombra.webp"},
     {"name": "Symmetra", "image": "C:\\Users\\andyw68\\Pictures\\Symmetra.webp"},
-    {"name": "Torbjörn", "image": "C:\\Users\\andyw68\\Pictures\\Torbjorn.webp"},
+    {"name": "Torbjorn", "image": "C:\\Users\\andyw68\\Pictures\\Torbjorn.webp"},
     {"name": "Tracer", "image": "C:\\Users\\andyw68\\Pictures\\Tracer.webp"},
     {"name": "Venture", "image": "C:\\Users\\andyw68\\Pictures\\Venture.webp"},
     {"name": "Widowmaker", "image": "C:\\Users\\andyw68\\Pictures\\Widowmaker.webp"},
@@ -232,9 +232,20 @@ def searchhero():
                 "Type":data[heroindex]["type"],
                 "Archetype":data[heroindex]["archetype"],
                 "Quote": data[heroindex]["quotes"]}
+        for pictures in pictures_heros:
+            if pictures["name"] == enteredhero.title():
+                pictureindex = pictures_heros.index(pictures)
+                img = Image.open(pictures_heros[pictureindex]["image"])
+                img = img.resize((450,450),Image.LANCZOS)
+                photo = ImageTk.PhotoImage(img)
+                photolabel = Label(window, image = photo)
+                deletelabelfunction.append(photolabel)
+                photolabel.grid(column = 4, row = 10, rowspan=20)
+                photolabel.image = photo
                 
+
         counters = data[heroindex]["counters"]
-         
+                        
         #give user response
         row2 =3
         for key, info in important_info.items():
@@ -248,35 +259,33 @@ def searchhero():
         deletelabelfunction.append(matchuplabel)
 
             # converts the -, --, +, ++ into text so reader knows wat they mean
-        row1= 11
+        row1= 8
         for matchups, info in counters.items():
             for matchup in  signs:
                 if info == matchup["matchup"]:
                     info = matchup["meaning"]
                     labelss = Label(window, text=f"{matchups}:{info}", font = "Times, 15", fg = matchup["bg"], bg = "grey")
                     labelss.grid(row = row1, column= 1)
-                    row1 += 2
+                    row1 += 1
                     deletelabelfunction.append(labelss)
        
     except:
             
-            errorlabel = Label(window, text =  "Please check ur spelling", font = "Arial, 10")
+            errorlabel = Label(window, text =  "Please check ur spelling and capitlization!", font = "Arial, 10")
             errorlabel.grid(row = 10, column = 10)
             deletelabelfunction.append(errorlabel)
 
 
 
+data1 = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
+data2 = data1.json()
+
+for hero in data2:
+    print(hero["name"])
 
 
 
-img = Image.open(pictures_heros[10]["image"])
-photo = ImageTk.PhotoImage(img)
-
-photolabel = Label(window, image = photo)
-photolabel.grid(column = 10, row = 20)
-photolabel.image = photo
 Inputhero.grid(row = 5, column = 1)
-
 enterbutton = Button(window, padx = 50, pady = 5, font = "Times, 15", text = "Search", command=searchhero, bg = "white", fg = "black").grid(row = 6, column = 1)
 
 
