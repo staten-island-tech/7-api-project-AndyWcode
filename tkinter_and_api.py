@@ -178,7 +178,7 @@ pictures_heros = [
     {"name": "Moira", "image": "C:\\Users\\andyw68\\Pictures\\Moira.webp"},
     {"name": "Orisa", "image": "C:\\Users\\andyw68\\Pictures\\Orisa.webp"},
     {"name": "Pharah", "image": "C:\\Users\\andyw68\\Pictures\\Pharah.webp"},
-    {"name": "Ramattra", "image": "C:\\Users\\andyw68\\Pictures\\Ramattra.webp"},
+    {"name": "Ramattra", "image": "C:\\Users\\andyw68\\Pictures\\rammatra.webp"},
     {"name": "Reaper", "image": "C:\\Users\\andyw68\\Pictures\\Reaper.webp"},
     {"name": "Reinhardt", "image": "C:\\Users\\andyw68\\Pictures\\Reinhardt.webp"},
     {"name": "Roadhog", "image": "C:\\Users\\andyw68\\Pictures\\Roadhog.webp"},
@@ -227,11 +227,14 @@ def searchhero():
         for info in data:
             if info["name"] == enteredhero.title():
                 heroindex = (data.index(info))
+        
         important_info = {
                 "Name":data[heroindex]["name"],
                 "Type":data[heroindex]["type"],
                 "Archetype":data[heroindex]["archetype"],
-                "Quote": data[heroindex]["quotes"]}
+                "Quote": data[heroindex]["quotes"]
+                }
+        counters = data[heroindex]["counters"]
         for pictures in pictures_heros:
             if pictures["name"] == enteredhero.title():
                 pictureindex = pictures_heros.index(pictures)
@@ -243,9 +246,9 @@ def searchhero():
                 photolabel.grid(column = 4, row = 10, rowspan=20)
                 photolabel.image = photo
                 
-
-        counters = data[heroindex]["counters"]
-                        
+        
+        
+        
         #give user response
         row2 =3
         for key, info in important_info.items():
@@ -258,7 +261,7 @@ def searchhero():
         matchuplabel.grid(row =10, column= 1)
         deletelabelfunction.append(matchuplabel)
 
-            # converts the -, --, +, ++ into text so reader knows wat they mean
+         # converts the -, --, +, ++ into text so reader knows wat they mean
         row1= 8
         for matchups, info in counters.items():
             for matchup in  signs:
@@ -268,6 +271,7 @@ def searchhero():
                     labelss.grid(row = row1, column= 1)
                     row1 += 1
                     deletelabelfunction.append(labelss)
+        
        
     except:
             
@@ -280,8 +284,7 @@ def searchhero():
 data1 = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
 data2 = data1.json()
 
-for hero in data2:
-    print(hero["name"])
+
 
 
 
