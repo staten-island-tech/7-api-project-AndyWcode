@@ -235,20 +235,18 @@ def searchhero():
                 "Quote": data[heroindex]["quotes"]
                 }
         counters = data[heroindex]["counters"]
+
         for pictures in pictures_heros:
-            if pictures["name"] == enteredhero.title():
-                pictureindex = pictures_heros.index(pictures)
-                img = Image.open(pictures_heros[pictureindex]["image"])
-                img = img.resize((450,450),Image.LANCZOS)
-                photo = ImageTk.PhotoImage(img)
-                photolabel = Label(window, image = photo)
-                deletelabelfunction.append(photolabel)
-                photolabel.grid(column = 4, row = 10, rowspan=20)
-                photolabel.image = photo
-                
-        
-        
-        
+                if pictures["name"] == enteredhero.title():
+                    pictureindex = pictures_heros.index(pictures)
+                    img = Image.open(pictures_heros[pictureindex]["image"])
+                    img = img.resize((450,450),Image.LANCZOS)
+                    photo = ImageTk.PhotoImage(img)
+                    photolabel = Label(window, image = photo)
+                    deletelabelfunction.append(photolabel)
+                    photolabel.grid(column = 4, row = 10, rowspan=20)
+                    photolabel.image = photo
+
         #give user response
         row2 =3
         for key, info in important_info.items():
@@ -261,7 +259,7 @@ def searchhero():
         matchuplabel.grid(row =10, column= 1)
         deletelabelfunction.append(matchuplabel)
 
-         # converts the -, --, +, ++ into text so reader knows wat they mean
+        # converts the -, --, +, ++ into text so reader knows wat they mean
         row1= 8
         for matchups, info in counters.items():
             for matchup in  signs:
@@ -271,18 +269,17 @@ def searchhero():
                     labelss.grid(row = row1, column= 1)
                     row1 += 1
                     deletelabelfunction.append(labelss)
-        
-       
-    except:
             
-            errorlabel = Label(window, text =  "Please check ur spelling and capitlization!", font = "Arial, 10")
-            errorlabel.grid(row = 10, column = 10)
-            deletelabelfunction.append(errorlabel)
+        
+    except:
+                
+        errorlabel = Label(window, text =  "Please check ur spelling and capitlization!", font = "Arial, 10")
+        errorlabel.grid(row = 10, column = 10)
+        deletelabelfunction.append(errorlabel)
 
 
 
-data1 = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
-data2 = data1.json()
+
 
 
 
