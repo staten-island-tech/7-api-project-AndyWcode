@@ -167,7 +167,7 @@ pictures_heros = [
     {"name": "Genji", "image": "C:\\Users\\andyw68\\Pictures\\Genji.webp"},
     {"name": "Hanzo", "image": "C:\\Users\\andyw68\\Pictures\\Hanzo.webp"},
     {"name": "Illari", "image": "C:\\Users\\andyw68\\Pictures\\Illari.webp"},
-    {"name": "JunkerQueen", "image": "C:\\Users\\andyw68\\Pictures\\JunkerQueen.webp"},
+    {"name": "Junker Queen", "image": "C:\\Users\\andyw68\\Pictures\\JunkerQueen.webp"},
     {"name": "Junkrat", "image": "C:\\Users\\andyw68\\Pictures\\Junkrat.webp"},
     {"name": "Kiriko", "image": "C:\\Users\\andyw68\\Pictures\\Kiriko.webp"},
     {"name": "Lifeweaver", "image": "C:\\Users\\andyw68\\Pictures\\Lifeweaver.webp"},
@@ -199,12 +199,45 @@ pictures_heros = [
 
 
 window = Tk()
-window.geometry("800x800")
+window.geometry("1200x1200")
 window.configure(bg = "grey")
 overwatchlabel = Label(window, text = "Input hero:", bg = "white", font = ("Times",15), fg ="black" ).grid(row =4, column =1)
 Inputhero = Entry(window, font = "Arial, 20")
 deletelabelfunction = []
 
+listofheros = requests.get(f"https://hero-matchups-api.netlify.app/.netlify/functions/api/heroes/")
+heroes = listofheros.json()
+
+
+def suplist():
+    Label(window, text = "SUPPORT", font = "Times, 15", fg = "Pink").grid(row = 3, column = 20)
+    r0w = 5
+    for hero in heroes:
+        if hero["type"] == "support":
+            h1 = Label(window, text = hero["name"])
+            h1.grid(row = r0w, column = 20)
+            r0w += 1
+def tanklist():
+    Label(window, text = "TANKS", font = "Times, 15", fg = "green").grid(row = 3, column = 21)
+    r0w = 5
+    for hero in heroes:
+        if hero["type"] == "tank":
+            h1 = Label(window, text = hero["name"])
+            h1.grid(row = r0w, column = 21)
+            r0w += 1
+def damage():
+    Label(window, text = "DAMAGE", font = "Times, 15", fg = "red").grid(row = 3, column = 22)
+    r0w = 5
+    for hero in heroes:
+        if hero["type"] == "damage":
+            h1 = Label(window, text = hero["name"])
+            h1.grid(row = r0w, column = 22)
+            r0w += 1
+
+
+suplist()
+tanklist()
+damage()
 
 def searchhero():
     
